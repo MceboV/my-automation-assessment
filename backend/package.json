@@ -1,0 +1,15 @@
+{
+  "name": "backend-automation",
+  "version": "1.0.0",
+  "description": "Backend automation tests for RestCountries API using k6",
+  "scripts": {
+    "test:all": "k6 run tests/comprehensive.test.js",
+    "test:schema": "k6 run tests/schema-validation.test.js",
+    "test:countries": "k6 run tests/country-count.test.js",
+    "test:languages": "k6 run tests/language-validation.test.js",
+    "test:with-report": "k6 run --out json=results/test-results.json tests/comprehensive.test.js"
+  },
+  "keywords": ["k6", "api-testing", "restcountries"],
+  "author": "Your Name",
+  "license": "MIT"
+}
