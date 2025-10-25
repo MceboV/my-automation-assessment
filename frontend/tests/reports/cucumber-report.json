@@ -1,0 +1,269 @@
+[
+  {
+    "description": "  As a BBC editor\n  I want to accurately report the results of the 2023 Las Vegas Grand Prix\n  So that my audience is informed about the key highlights of the race",
+    "elements": [
+      {
+        "description": "",
+        "id": "formula-1-race-results-validation;validate-top-3-finishers-of-las-vegas-grand-prix-2023---requirements-defect-identified",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Validate top 3 finishers of Las Vegas Grand Prix 2023 - REQUIREMENTS DEFECT IDENTIFIED",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1115358500
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 979069600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I navigate to BBC Sport Formula 1 section",
+            "match": {
+              "location": "tests\\step-definitions\\race-results.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 848039600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I search for \"Las Vegas Grand Prix 2023 results\"",
+            "match": {
+              "location": "tests\\step-definitions\\race-results.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12269032800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see race results showing the actual top 3 finishers",
+            "match": {
+              "location": "tests\\step-definitions\\race-results.steps.ts:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4023499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I should report the requirements defect: incorrect 2nd place driver",
+            "match": {
+              "location": "tests\\step-definitions\\race-results.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1001400
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Position",
+                      "Driver",
+                      "Team"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "1",
+                      "Max Verstappen",
+                      "Red Bull"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2",
+                      "Charles Leclerc",
+                      "Ferrari"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "3",
+                      "Sergio Perez",
+                      "Red Bull"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 12,
+            "name": "the actual results should be:",
+            "match": {
+              "location": "tests\\step-definitions\\race-results.steps.ts:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1698399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 226910400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 554616099
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@defect",
+            "line": 6
+          },
+          {
+            "name": "@requirements_issue",
+            "line": 6
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "formula-1-race-results-validation",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Formula 1 Race Results Validation",
+    "tags": [],
+    "uri": "tests\\features\\race-results.feature"
+  },
+  {
+    "description": "  As an editor\n  I want to ensure that search functionality returns relevant results\n  So that users can access diverse and informative content",
+    "elements": [
+      {
+        "description": "",
+        "id": "search-functionality-validation;validate-bbc-search-functionality-returns-relevant-results",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Validate BBC search functionality returns relevant results",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1126475199
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 992014400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the BBC website",
+            "match": {
+              "location": "tests\\step-definitions\\search-functionality.steps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2747991600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I use the search functionality to search for \"Sport\"",
+            "match": {
+              "location": "tests\\step-definitions\\search-functionality.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20305839100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I should see at least 4 search results",
+            "match": {
+              "location": "tests\\step-definitions\\search-functionality.steps.ts:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1553000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "the results should contain relevant sport content",
+            "match": {
+              "location": "tests\\step-definitions\\search-functionality.steps.ts:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2467099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 245336299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 251776300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "search-functionality-validation",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Search Functionality Validation",
+    "tags": [],
+    "uri": "tests\\features\\search-functionality.feature"
+  }
+]
