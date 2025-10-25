@@ -7,8 +7,12 @@
     "test:schema": "k6 run tests/schema-validation.test.js",
     "test:countries": "k6 run tests/country-count.test.js",
     "test:languages": "k6 run tests/language-validation.test.js",
-    "test:with-report": "k6 run --out json=results/test-results.json tests/comprehensive.test.js"
+    "test:ci": "k6 run tests/comprehensive.test.js --summary-export=results/k6-results.json",
+    "test:docker": "docker build -t automation-backend -f Dockerfile.backend . && docker run -v $(pwd)/results:/app/results automation-backend",
+    "test:performance": "k6 run tests/performance.test.js --out json=results/performance-results.json",
+    "test:load": "k6 run --vus 10 --duration 30s tests/load.test.js"
   },
+
   "keywords": ["k6", "api-testing", "restcountries"],
   "author": "Your Name",
   "license": "MIT"
