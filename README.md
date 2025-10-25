@@ -14,19 +14,18 @@ automation-assessment/
 │   ├── tests/
 │   │   ├── features/         # BDD Feature files
 │   │   ├── step-definitions/ # TypeScript step implementations
-│   │   └── pages/           # Page Object Model
+│   │   └── pages/            # Page Object Model
 │   ├── package.json
 │   ├── playwright.config.ts
 │   └── cucumber.json
 ├── backend/                  # RestCountries API Automation
-│   ├── tests/               # k6 test scenarios
-│   ├── utils/               # API client and validators
-│   ├── schemas/             # JSON schema files
+│   ├── tests/                # k6 test scenarios
+│   ├── utils/                # API client and validators
+│   ├── schemas/              # JSON schema files
 │   └── package.json
+├── docker-compose.yml
 └── README.md
 ```
-
----
 
 ## **Installation Guide**
 
