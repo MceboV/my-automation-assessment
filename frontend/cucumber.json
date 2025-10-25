@@ -1,17 +1,10 @@
 {
   "default": {
-    "formatOptions": {
-      "snippetInterface": "async-await"
-    },
-    "publishQuiet": true,
     "requireModule": ["ts-node/register"],
     "require": [
+      "tests/support/**/*.ts",
       "tests/step-definitions/**/*.ts"
     ],
-    "format": [
-      "progress-bar",
-      "json:tests/reports/cucumber-report.json",
-      "@cucumber/pretty-formatter"
-    ]
+    "format": ["progress", "json:tests/reports/cucumber-report.json"]
   }
 }
