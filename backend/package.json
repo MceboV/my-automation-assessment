@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend automation tests for RestCountries API using k6",
   "scripts": {
-    "test:all": "k6 run tests/comprehensive.test.js",
+    "test:all": "k6 run tests/end-to-end-scenarios.test.js",
     "test:schema": "k6 run tests/schema-validation.test.js",
     "test:countries": "k6 run tests/country-count.test.js",
     "test:languages": "k6 run tests/language-validation.test.js",
