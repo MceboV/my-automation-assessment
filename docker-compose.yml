@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  frontend-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: automation-frontend
+    volumes:
+      - ./frontend/test-results:/app/test-results
+      - ./frontend/tests/reports:/app/tests/reports
+    environment:
+      - HEADLESS=true
+      - SLOW_MO=0
+    networks:
+      - automation-network
+
+  backend-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: automation-backend
+    volumes:
+      - ./backend/results:/app/results
+    environment:
+      - K6_OUT=json=/app/results/k6-results.json
+    networks:
+      - automation-network
+    depends_on:
+      - frontend-tests
+
+  test-reporter:
+    image: alpine:latest
+    container_name: test-reporter
+    volumes:
+      - ./frontend/test-results:/frontend-results
+      - ./backend/results:/backend-results
+    command: |
+      sh -c "
+        echo '=== TEST EXECUTION COMPLETE ==='
+        echo 'Frontend results: /frontend-results'
+        echo 'Backend results: /backend-results'
+        ls -la /frontend-results/ 2>/dev/null || echo 'No frontend results'
+        ls -la /backend-results/ 2>/dev/null || echo 'No backend results'
+      "
+    networks:
+      - automation-network
+    depends_on:
+      - frontend-tests
+      - backend-tests
+
+networks:
+  automation-network:
+    driver: bridge
