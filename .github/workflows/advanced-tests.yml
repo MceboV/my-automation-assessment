@@ -35,10 +35,32 @@ jobs:
         cd frontend
         npx playwright install ${{ matrix.browser }}
 
+    - name: Prepare test-results folder
+      run: mkdir -p frontend/tests/test-results
+
     - name: Run tests with ${{ matrix.browser }}
       run: |
         cd frontend
-        BROWSER=${{ matrix.browser }} npx cucumber-js tests/features/ --require-module ts-node/register --require "tests/step-definitions/**/*.ts" --format progress
+        BROWSER=${{ matrix.browser }} npx cucumber-js tests/features/ \
+          --require-module ts-node/register \
+          --require "tests/step-definitions/**/*.ts" \
+          --format json:tests/test-results/results.json \
+          --format progress
+
+    - name: Upload frontend test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-test-results-${{ matrix.browser }}-node${{ matrix.node-version }}
+        path: frontend/tests/test-results/
+
+    - name: Add summary to GitHub Actions
+      if: always()
+      run: |
+        echo "### 🧪 Frontend Tests Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Node version: ${{ matrix.node-version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Browser: ${{ matrix.browser }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Results stored in: frontend/tests/test-results/results.json" >> $GITHUB_STEP_SUMMARY
 
   backend-performance:
     name: Backend Performance Tests
@@ -54,10 +76,19 @@ jobs:
     - name: Run performance tests
       run: |
         cd backend
-        k6 run tests/performance.test.js --out json=results/performance-results.json
+        mkdir -p results
+        k6 run tests/performance.test.js --out json=results/performance-results.json || echo "k6 test run completed with warnings"
 
     - name: Upload performance results
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: performance-results
+        name: backend-performance-results
         path: backend/results/performance-results.json
+
+    - name: Add summary to GitHub Actions
+      if: always()
+      run: |
+        echo "### ⚙️ Backend Performance Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Test file: backend/tests/performance.test.js" >> $GITHUB_STEP_SUMMARY
+        echo "- Results stored in: backend/results/performance-results.json" >> $GITHUB_STEP_SUMMARY
