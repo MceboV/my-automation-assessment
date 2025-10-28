@@ -268,3 +268,6 @@ Several tests are strategically designed to "fail" in a way that delivers signif
 
 ---
 
+Note: CI/CD workflows and Docker setup recently added to demonstrate scalable automation architecture. Pending local verification before full production run
+
+---

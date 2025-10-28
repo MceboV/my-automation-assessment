@@ -1,0 +1,63 @@
+name: Advanced Testing Matrix
+
+on:
+  schedule:
+    - cron: '0 8 * * 1-5'  # Run weekdays at 8 AM
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  frontend-matrix:
+    name: Frontend Tests (Matrix)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+        browser: [chromium, firefox]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Install Playwright
+      run: |
+        cd frontend
+        npx playwright install ${{ matrix.browser }}
+
+    - name: Run tests with ${{ matrix.browser }}
+      run: |
+        cd frontend
+        BROWSER=${{ matrix.browser }} npx cucumber-js tests/features/ --require-module ts-node/register --require "tests/step-definitions/**/*.ts" --format progress
+
+  backend-performance:
+    name: Backend Performance Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup k6
+      uses: grafana/setup-k6-action@v1
+
+    - name: Run performance tests
+      run: |
+        cd backend
+        k6 run tests/performance.test.js --out json=results/performance-results.json
+
+    - name: Upload performance results
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-results
+        path: backend/results/performance-results.json

@@ -1,0 +1,120 @@
+name: CI/CD - Full Stack Automation Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  frontend-tests:
+    name: Frontend Tests (BBC Sport)
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Install Playwright browsers
+      run: |
+        cd frontend
+        npx playwright install
+
+    - name: Run frontend tests
+      run: |
+        cd frontend
+        npx cucumber-js tests/features/ --require-module ts-node/register --require "tests/step-definitions/**/*.ts" --format progress
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: frontend-test-results
+        path: |
+          frontend/test-results/
+        retention-days: 7
+
+  backend-tests:
+    name: Backend Tests (RestCountries API)
+    runs-on: ubuntu-latest
+    needs: frontend-tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup k6
+      uses: grafana/setup-k6-action@v1
+      with:
+        k6-version: '0.50.0'
+
+    - name: Run backend tests
+      run: |
+        cd backend
+        k6 run tests/comprehensive.test.js --summary-export=results/k6-results.json
+
+    - name: Run individual backend tests
+      run: |
+        cd backend
+        echo "Running country count test..."
+        k6 run tests/country-count.test.js --no-summary
+        echo "Running language validation test..."
+        k6 run tests/language-validation.test.js --no-summary
+        echo "Running schema validation test..."
+        k6 run tests/schema-validation.test.js --no-summary
+
+    - name: Upload backend test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: backend-test-results
+        path: |
+          backend/results/
+        retention-days: 7
+
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [frontend-tests, backend-tests]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build frontend Docker image
+      run: |
+        docker build -t automation-frontend:latest -f Dockerfile.frontend .
+
+    - name: Build backend Docker image
+      run: |
+        docker build -t automation-backend:latest -f Dockerfile.backend .
+
+    - name: Log in to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push Docker images
+      if: github.event_name != 'pull_request'
+      run: |
+        docker tag automation-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/automation-frontend:latest
+        docker tag automation-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/automation-backend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/automation-frontend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/automation-backend:latest

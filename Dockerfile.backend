@@ -1,0 +1,20 @@
+FROM grafana/k6:latest
+
+WORKDIR /app
+
+# Install additional tools
+USER root
+RUN apk add --no-cache nodejs npm
+
+# Copy backend files
+COPY backend/ ./
+
+# Create results directory
+RUN mkdir -p results
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD k6 version
+
+# Default command - run comprehensive tests
+CMD ["run", "tests/comprehensive.test.js"]
