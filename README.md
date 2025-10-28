@@ -145,6 +145,9 @@ npm run test:all
 k6 run --verbose ./tests/comprehensive.test.js
 ```
 
+```
+**performance Test:**
+k6 run tests/performance.test.js --out json=results/performance-results.json
 ---
 
 ## **Test Scenarios & Business Value**
