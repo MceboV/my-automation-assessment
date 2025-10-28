@@ -45,9 +45,8 @@ jobs:
           --require-module ts-node/register \
           --require "tests/step-definitions/**/*.ts" \
           --format json:tests/test-results/results.json \
-          --format progress
-      env:
-        HEADLESS: true
+          --format progress \
+          --world-parameters "{\"headless\": true}
 
     - name: Upload frontend test results
       if: always()
