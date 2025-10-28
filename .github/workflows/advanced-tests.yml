@@ -46,6 +46,8 @@ jobs:
           --require "tests/step-definitions/**/*.ts" \
           --format json:tests/test-results/results.json \
           --format progress
+      env:
+        HEADLESS: true
 
     - name: Upload frontend test results
       if: always()
