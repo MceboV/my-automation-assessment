@@ -2,8 +2,8 @@ name: Advanced Testing Matrix
 
 on:
   schedule:
-    - cron: '0 8 * * 1-5'  # Run weekdays at 8 AM
-  workflow_dispatch:  # Manual trigger
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
 
 jobs:
   frontend-matrix:
