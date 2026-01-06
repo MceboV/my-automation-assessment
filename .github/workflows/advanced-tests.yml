@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16, 18, 20]
+        node-version: [ 18, 20]
         browser: [chromium, firefox]
 
     steps:
@@ -25,6 +25,10 @@ jobs:
         cache: 'npm'
         cache-dependency-path: frontend/package-lock.json
 
+    - name: Verify frontend directory
+      run: test -d frontend
+
+
     - name: Install dependencies
       run: |
         cd frontend
@@ -33,7 +37,7 @@ jobs:
     - name: Install Playwright
       run: |
         cd frontend
-        npx playwright install ${{ matrix.browser }}
+        npx playwright install --with-deps ${{ matrix.browser }}
 
     - name: Prepare test-results folder
       run: mkdir -p frontend/tests/test-results
@@ -41,12 +45,13 @@ jobs:
     - name: Run tests with ${{ matrix.browser }}
       run: |
         cd frontend
+        echo "Running tests on ${{ matrix.browser }} with Node ${{ matrix.node-version }}"
         BROWSER=${{ matrix.browser }} npx cucumber-js tests/features/ \
           --require-module ts-node/register \
           --require "tests/step-definitions/**/*.ts" \
           --format json:tests/test-results/results.json \
           --format progress \
-          --world-parameters "{\"headless\": true}
+          --world-parameters "{\"headless\": true}"
 
     - name: Upload frontend test results
       if: always()
