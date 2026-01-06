@@ -42,7 +42,15 @@ jobs:
     - name: Prepare test-results folder
       run: mkdir -p frontend/tests/test-results
 
+    - name: Verify ts-node
+      run: |
+        cd frontend
+        npx ts-node --version
+
+
     - name: Run tests with ${{ matrix.browser }}
+      env:
+       PLAYWRIGHT_BROWSERS_PATH: 0
       run: |
         cd frontend
         echo "Running tests on ${{ matrix.browser }} with Node ${{ matrix.node-version }}"
