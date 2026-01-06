@@ -47,19 +47,22 @@ jobs:
         cd frontend
         npx ts-node --version
 
+    - name: Install Xvfb
+      run: sudo apt-get update && sudo apt-get install -y xvfb
 
-    - name: Run tests with ${{ matrix.browser }}
-      env:
-       PLAYWRIGHT_BROWSERS_PATH: 0
+
+    - name: Run tests with xvfb
       run: |
         cd frontend
         echo "Running tests on ${{ matrix.browser }} with Node ${{ matrix.node-version }}"
+        xvfb-run --auto-servernum -- \
         BROWSER=${{ matrix.browser }} npx cucumber-js tests/features/ \
-          --require-module ts-node/register \
-          --require "tests/step-definitions/**/*.ts" \
-          --format json:tests/test-results/results.json \
-          --format progress \
-          --world-parameters "{\"headless\": true}"
+        --require-module ts-node/register \
+        --require "tests/step-definitions/**/*.ts" \
+        --format json:tests/test-results/results.json \
+        --format progress \
+        --world-parameters "{\"headless\": false}"
+
 
     - name: Upload frontend test results
       if: always()
