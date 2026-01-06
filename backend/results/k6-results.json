@@ -1,0 +1,173 @@
+{
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "1. API STABILITY ASSESSMENT": {
+                "checks": {
+                    "API returns successful response with data": {
+                        "name": "API returns successful response with data",
+                        "path": "::1. API STABILITY ASSESSMENT::API returns successful response with data",
+                        "id": "2f4f47ea972160d9675109ade804d864",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "1. API STABILITY ASSESSMENT",
+                "path": "::1. API STABILITY ASSESSMENT",
+                "id": "53695e3803f3b967b3067b5ee6629c28",
+                "groups": {}
+            },
+            "2. COUNTRY COUNT REALITY CHECK": {
+                "name": "2. COUNTRY COUNT REALITY CHECK",
+                "path": "::2. COUNTRY COUNT REALITY CHECK",
+                "id": "e5b7b3f8db60865584b94af81a3d471b",
+                "groups": {},
+                "checks": {
+                        "requirements defect analyzed and solution proposed": {
+                            "id": "3473c8203e3bb721bf5657c1d13fee23",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "requirements defect analyzed and solution proposed",
+                            "path": "::2. COUNTRY COUNT REALITY CHECK::requirements defect analyzed and solution proposed"
+                        }
+                    }
+            },
+            "3. SASL RECOGNITION GAP ANALYSIS": {
+                "name": "3. SASL RECOGNITION GAP ANALYSIS",
+                "path": "::3. SASL RECOGNITION GAP ANALYSIS",
+                "id": "61033a3eb7d88e04afbc54cf5f01907b",
+                "groups": {},
+                "checks": {
+                        "SASL recognition gap identified and documented for product team": {
+                            "name": "SASL recognition gap identified and documented for product team",
+                            "path": "::3. SASL RECOGNITION GAP ANALYSIS::SASL recognition gap identified and documented for product team",
+                            "id": "105a953eeb2fbd4480cc410ed76438fe",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            }
+        },
+        "checks": {}
+    },
+    "metrics": {
+        "iterations": {
+            "count": 1,
+            "rate": 0.15413763285257445
+        },
+        "iteration_duration": {
+            "avg": 6486.6862,
+            "min": 6486.6862,
+            "med": 6486.6862,
+            "max": 6486.6862,
+            "p(90)": 6486.6862,
+            "p(95)": 6486.6862
+        },
+        "group_duration": {
+            "max": 4677.1161,
+            "p(90)": 3971.5739000000003,
+            "p(95)": 4324.344999999999,
+            "avg": 2161.6729333333333,
+            "min": 658.4976,
+            "med": 1149.4051
+        },
+        "http_req_sending": {
+            "p(95)": 0.52574,
+            "avg": 0.3434,
+            "min": 0,
+            "med": 0.5018,
+            "max": 0.5284,
+            "p(90)": 0.52308
+        },
+        "http_req_waiting": {
+            "p(90)": 1506.19498,
+            "p(95)": 1572.4172899999999,
+            "avg": 1086.8214333333333,
+            "min": 645.4082,
+            "med": 976.4165,
+            "max": 1638.6396
+        },
+        "http_req_duration": {
+            "max": 2589.7335,
+            "p(90)": 2298.27628,
+            "p(95)": 2444.0048899999997,
+            "avg": 1457.2470333333333,
+            "min": 649.5602,
+            "med": 1132.4474
+        },
+        "checks": {
+            "passes": 3,
+            "fails": 0,
+            "value": 1
+        },
+        "data_received": {
+            "count": 159631,
+            "rate": 24605.144469889314
+        },
+        "http_req_tls_handshaking": {
+            "p(90)": 108.43888,
+            "p(95)": 121.99373999999999,
+            "avg": 45.18286666666666,
+            "min": 0,
+            "med": 0,
+            "max": 135.5486
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 3,
+            "value": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(95)": 2444.0048899999997,
+            "avg": 1457.2470333333333,
+            "min": 649.5602,
+            "med": 1132.4474,
+            "max": 2589.7335,
+            "p(90)": 2298.27628
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "data_sent": {
+            "count": 1439,
+            "rate": 221.80405367485463
+        },
+        "http_reqs": {
+            "count": 3,
+            "rate": 0.46241289855772333
+        },
+        "http_req_receiving": {
+            "avg": 370.08220000000006,
+            "min": 3.6502,
+            "med": 156.0309,
+            "max": 950.5655,
+            "p(90)": 791.65858,
+            "p(95)": 871.11204
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_blocked": {
+            "avg": 694.0333,
+            "min": 0,
+            "med": 0,
+            "max": 2082.0999,
+            "p(90)": 1665.6799200000003,
+            "p(95)": 1873.8899099999999
+        },
+        "http_req_connecting": {
+            "p(90)": 76.76496,
+            "p(95)": 86.36057999999998,
+            "avg": 31.9854,
+            "min": 0,
+            "med": 0,
+            "max": 95.9562
+        }
+    }
+}

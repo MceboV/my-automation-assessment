@@ -63,7 +63,7 @@ jobs:
     - name: Run backend tests
       run: |
         cd backend
-        k6 run tests/comprehensive.test.js --summary-export=results/k6-results.json
+        k6 run tests/end-to-end-scenarios.test.js --summary-export=results/k6-results.json
 
     - name: Run individual backend tests
       run: |
