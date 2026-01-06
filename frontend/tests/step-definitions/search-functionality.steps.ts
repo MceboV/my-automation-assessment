@@ -10,7 +10,7 @@ let searchResults: any[] = [];
 Before(async function() {
   console.log('Launching browser...');
   browser = await chromium.launch({
-    headless: false,
+    headless: true,
     slowMo: 500
   });
   page = await browser.newPage();
