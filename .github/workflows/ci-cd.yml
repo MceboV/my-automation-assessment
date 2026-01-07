@@ -104,7 +104,8 @@ jobs:
       run: |
         docker build -t automation-backend:latest -f Dockerfile.backend .
 
-    # ensure that the you have you docker set up sorted. Make sure it is read & write
+    # Ensure that the you have you docker set up. Make sure it is read & write.
+    # Also ensure that the in Github you have repository secret names matching the username and password variables in this file.
     - name: Log in to Docker Hub
       if: github.event_name != 'pull_request'
       uses: docker/login-action@v3
